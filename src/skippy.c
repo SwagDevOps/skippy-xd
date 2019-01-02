@@ -314,7 +314,7 @@ update_clients(MainWin *mw, dlist *clients, Bool *touched) {
 
 	if (touched)
 		*touched = False;
-	
+
 	// Terminate clients that are no longer managed
 	for (dlist *iter = clients; iter; ) {
 		ClientWin *cw = (ClientWin *) iter->data;
@@ -358,7 +358,7 @@ do_layout(MainWin *mw, dlist *clients, Window focus, Window leader) {
 
 	long desktop = wm_get_current_desktop(ps);
 	float factor;
-	
+
 	/* Update the client table, pick the ones we want and sort them */
 	clients = update_clients(mw, clients, 0);
 	if (!clients) {
@@ -385,12 +385,12 @@ do_layout(MainWin *mw, dlist *clients, Window focus, Window leader) {
 			mw->cod = tmp;
 		}
 	}
-	
+
 	if (!mw->cod)
 		return clients;
-	
+
 	dlist_sort(mw->cod, clientwin_sort_func, 0);
-	
+
 	/* Move the mini windows around */
 	{
 		unsigned int width = 0, height = 0;
@@ -1138,7 +1138,7 @@ parse_args(session_t *ps, int argc, char **argv, bool first_pass) {
 		}
 	}
 }
-	
+
 int main(int argc, char *argv[]) {
 	session_t *ps = NULL;
 	int ret = RET_SUCCESS;
@@ -1199,7 +1199,7 @@ int main(int argc, char *argv[]) {
 		// less efficient, may introduce inconsistent default value, and
 		// occupies a lot more memory for non-string types.
 		{
-                // Appending UID to the file name
+                        // Appending UID to the file name
                         // Dash-separated initial single-digit string
                         int uid = (int)getuid(), pipeStrLen = 3;
                         {
@@ -1211,7 +1211,7 @@ int main(int argc, char *argv[]) {
                         pipeStrLen += strlen(path);
 
                         unsigned char * pipePath = malloc (pipeStrLen * sizeof(unsigned char));
-                        sprintf(pipePath, "%s-%i", path, uid);
+                        sprintf(pipePath, "%s.%i", path, uid);
 
                         ps->o.pipePath = pipePath;
                 }
