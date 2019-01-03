@@ -1,21 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 killSkippyXd() {
-
   killall 'skippy-xd'
 
-  if [ -f '/tmp/skippy-xd-fifo' ]
-  then
-    rm /tmp/skippy-xd-fifo
-    touch /tmp/skippy-xd-fifo
-  fi
-
   exit $?
-
 }
 
 toggleSkippyXd() {
-
   skippyDaemonStartCommand="skippy-xd --start-daemon"
   psSkippyOut="`pgrep -f 'skippy-xd '`"
   psSkippyActivateOut="`pgrep -f 'skippy-xd --activate-window-picker'`"
@@ -28,11 +19,11 @@ toggleSkippyXd() {
     skippyDaemonStartCommand="$skippyDaemonStartCommand --config $skippyConfig"
   fi
 
-  ## IF, when calling skippy-xd, to start the window picker, 
-  ## a process to do so already exists, then skippy-xd is stuck, 
+  ## IF, when calling skippy-xd, to start the window picker,
+  ## a process to do so already exists, then skippy-xd is stuck,
   ## so we must clear its queue and restart its daemon.
   ## ELSE, if the skippy-xd daemon has not been started,
-  ## we should start it.  
+  ## we should start it.
 
   if [ ! -z "$psSkippyActivateOut" ] || [ ! -z "$psSkippyToggleOut" ]
   then
